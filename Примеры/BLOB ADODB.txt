@@ -1,70 +1,70 @@
+п»ї
 
 
-
-Функция ЗаписатьОтчетВБазуТелеграм(ИмяОтчета,ДатаОтчета,ВариантОтчета,РасширениеФайла,ПолноеИмяФайла) Экспорт
+Р¤СѓРЅРєС†РёСЏ Р—Р°РїРёСЃР°С‚СЊРћС‚С‡РµС‚Р’Р‘Р°Р·СѓРўРµР»РµРіСЂР°Рј(РРјСЏРћС‚С‡РµС‚Р°,Р”Р°С‚Р°РћС‚С‡РµС‚Р°,Р’Р°СЂРёР°РЅС‚РћС‚С‡РµС‚Р°,Р Р°СЃС€РёСЂРµРЅРёРµР¤Р°Р№Р»Р°,РџРѕР»РЅРѕРµРРјСЏР¤Р°Р№Р»Р°) Р­РєСЃРїРѕСЂС‚
 		
-	Соединение = ПолучитьСоединениеСБазой();    	
-	НаборЗаписей = Новый COMОбъект("ADODB.Recordset");
-	КомандаSQL = Новый COMОбъект("ADODB.Command");
-	КомандаSQL.ActiveConnection = Соединение;
-	КомандаSQL.CommandText=    "INSERT INTO TABLE_NAME(ReportName, DateTime, ReportType,Data, FileExtension) VALUES(?,?,?,?,?)";    
-	КомандаSQL.CommandType=1;//adCmdText
+	РЎРѕРµРґРёРЅРµРЅРёРµ = РџРѕР»СѓС‡РёС‚СЊРЎРѕРµРґРёРЅРµРЅРёРµРЎР‘Р°Р·РѕР№();    	
+	РќР°Р±РѕСЂР—Р°РїРёСЃРµР№ = РќРѕРІС‹Р№ COMРћР±СЉРµРєС‚("ADODB.Recordset");
+	РљРѕРјР°РЅРґР°SQL = РќРѕРІС‹Р№ COMРћР±СЉРµРєС‚("ADODB.Command");
+	РљРѕРјР°РЅРґР°SQL.ActiveConnection = РЎРѕРµРґРёРЅРµРЅРёРµ;
+	РљРѕРјР°РЅРґР°SQL.CommandText=    "INSERT INTO TABLE_NAME(ReportName, DateTime, ReportType,Data, FileExtension) VALUES(?,?,?,?,?)";    
+	РљРѕРјР°РЅРґР°SQL.CommandType=1;//adCmdText
 		
 	//ReportName
 	//name, type, direction=1, size
-	ПараметрReportName = КомандаSQL.CreateParameter("ReportName", 200, 1, 100);//adVarChar, adParamInput	
-	ПараметрReportName.Value = Строка(ИмяОтчета); 
-	КомандаSQL.Parameters.Append(ПараметрReportName);
+	РџР°СЂР°РјРµС‚СЂReportName = РљРѕРјР°РЅРґР°SQL.CreateParameter("ReportName", 200, 1, 100);//adVarChar, adParamInput	
+	РџР°СЂР°РјРµС‚СЂReportName.Value = РЎС‚СЂРѕРєР°(РРјСЏРћС‚С‡РµС‚Р°); 
+	РљРѕРјР°РЅРґР°SQL.Parameters.Append(РџР°СЂР°РјРµС‚СЂReportName);
 	
 	//DateTime
-	ПараметрDateTime = КомандаSQL.CreateParameter("DateTime", 135);//adDBTimeStamp 	
-	ПараметрDateTime.Value = Строка(ДатаОтчета); 
-	КомандаSQL.Parameters.Append(ПараметрDateTime);
+	РџР°СЂР°РјРµС‚СЂDateTime = РљРѕРјР°РЅРґР°SQL.CreateParameter("DateTime", 135);//adDBTimeStamp 	
+	РџР°СЂР°РјРµС‚СЂDateTime.Value = РЎС‚СЂРѕРєР°(Р”Р°С‚Р°РћС‚С‡РµС‚Р°); 
+	РљРѕРјР°РЅРґР°SQL.Parameters.Append(РџР°СЂР°РјРµС‚СЂDateTime);
 	
 	//ReportName
 	//name, type, direction=1, size
-	ПараметрReportType = КомандаSQL.CreateParameter("ReportType", 200, 1, 100);//adVarChar, adParamInput	
-	ПараметрReportType.Value = Строка(ВариантОтчета); 
-	КомандаSQL.Parameters.Append(ПараметрReportType);
+	РџР°СЂР°РјРµС‚СЂReportType = РљРѕРјР°РЅРґР°SQL.CreateParameter("ReportType", 200, 1, 100);//adVarChar, adParamInput	
+	РџР°СЂР°РјРµС‚СЂReportType.Value = РЎС‚СЂРѕРєР°(Р’Р°СЂРёР°РЅС‚РћС‚С‡РµС‚Р°); 
+	РљРѕРјР°РЅРґР°SQL.Parameters.Append(РџР°СЂР°РјРµС‚СЂReportType);
 	
 	
 	//DATA	
-	Поток = Новый COMОбъект("ADODB.Stream");
-	Поток.Type = 1;
-	Поток.Open();
-	//ДанныеФайла = Новый Файл(ПолноеИмяФайла);
-	Поток.LoadFromFile(ПолноеИмяФайла);
-	Если Поток.Size > 0 тогда
-		ПараметрDATA = КомандаSQL.CreateParameter("Data", 128, 1, Поток.Size);//adLongVarBinary, adParamInput
+	РџРѕС‚РѕРє = РќРѕРІС‹Р№ COMРћР±СЉРµРєС‚("ADODB.Stream");
+	РџРѕС‚РѕРє.Type = 1;
+	РџРѕС‚РѕРє.Open();
+	//Р”Р°РЅРЅС‹РµР¤Р°Р№Р»Р° = РќРѕРІС‹Р№ Р¤Р°Р№Р»(РџРѕР»РЅРѕРµРРјСЏР¤Р°Р№Р»Р°);
+	РџРѕС‚РѕРє.LoadFromFile(РџРѕР»РЅРѕРµРРјСЏР¤Р°Р№Р»Р°);
+	Р•СЃР»Рё РџРѕС‚РѕРє.Size > 0 С‚РѕРіРґР°
+		РџР°СЂР°РјРµС‚СЂDATA = РљРѕРјР°РЅРґР°SQL.CreateParameter("Data", 128, 1, РџРѕС‚РѕРє.Size);//adLongVarBinary, adParamInput
 		
-		Пока НЕ Поток.EOS Цикл
-			ПараметрDATA.AppendChunk(Поток.Read(10240));
-		КонецЦикла;     
-		КомандаSQL.Parameters.Append(ПараметрDATA);
-	КонецЕсли;	
+		РџРѕРєР° РќР• РџРѕС‚РѕРє.EOS Р¦РёРєР»
+			РџР°СЂР°РјРµС‚СЂDATA.AppendChunk(РџРѕС‚РѕРє.Read(10240));
+		РљРѕРЅРµС†Р¦РёРєР»Р°;     
+		РљРѕРјР°РЅРґР°SQL.Parameters.Append(РџР°СЂР°РјРµС‚СЂDATA);
+	РљРѕРЅРµС†Р•СЃР»Рё;	
 	//ReportName
 	//name, type, direction=1, size
-	ПараметрFileExtension = КомандаSQL.CreateParameter("FileExtension", 200, 1, 100);//adVarChar, adParamInput	
-	ПараметрFileExtension.Value = Строка(РасширениеФайла); 
-	КомандаSQL.Parameters.Append(ПараметрFileExtension);
+	РџР°СЂР°РјРµС‚СЂFileExtension = РљРѕРјР°РЅРґР°SQL.CreateParameter("FileExtension", 200, 1, 100);//adVarChar, adParamInput	
+	РџР°СЂР°РјРµС‚СЂFileExtension.Value = РЎС‚СЂРѕРєР°(Р Р°СЃС€РёСЂРµРЅРёРµР¤Р°Р№Р»Р°); 
+	РљРѕРјР°РЅРґР°SQL.Parameters.Append(РџР°СЂР°РјРµС‚СЂFileExtension);
 
 	
 	//PEW
-	НаборЗаписей=КомандаSQL.Execute();
+	РќР°Р±РѕСЂР—Р°РїРёСЃРµР№=РљРѕРјР°РЅРґР°SQL.Execute();
 
 		
-КонецФункции // ()
+РљРѕРЅРµС†Р¤СѓРЅРєС†РёРё // ()
 
 
-Функция ПолучитьСоединениеСБазой()
-    extConnSQL = Новый ComОбъект("ADODB.Connection");
-    СтрокаСоединения =  "Provider=SQLOLEDB.1;
+Р¤СѓРЅРєС†РёСЏ РџРѕР»СѓС‡РёС‚СЊРЎРѕРµРґРёРЅРµРЅРёРµРЎР‘Р°Р·РѕР№()
+    extConnSQL = РќРѕРІС‹Р№ ComРћР±СЉРµРєС‚("ADODB.Connection");
+    РЎС‚СЂРѕРєР°РЎРѕРµРґРёРЅРµРЅРёСЏ =  "Provider=SQLOLEDB.1;
     |User ID=login;
     |Pwd=pass;
     |Data Source=server;
     |Initial Catalog=base";
-    extConnSQL.ConnectionString = СтрокаСоединения;
+    extConnSQL.ConnectionString = РЎС‚СЂРѕРєР°РЎРѕРµРґРёРЅРµРЅРёСЏ;
     extConnSQL.Open();
-    Возврат extConnSQL;
-КонецФункции
+    Р’РѕР·РІСЂР°С‚ extConnSQL;
+РљРѕРЅРµС†Р¤СѓРЅРєС†РёРё
 
